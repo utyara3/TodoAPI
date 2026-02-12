@@ -15,10 +15,6 @@ async def init_db() -> None:
             )
         """)
 
-        await conn.execute(
-            "CREATE INDEX IF NOT EXISTS idx_todo_create_time ON todos (created_at)"
-        )
-
         await conn.commit()
 
 

@@ -26,7 +26,7 @@ async def get_todos():
     return todos_raw
 
 
-@app.get("/todos/{id}", response_model=TodoGetSchema)
+@app.get("/todos/{todo_id}", response_model=TodoGetSchema)
 async def get_todo(todo_id: int):
     todo = await db.get_todo_by_id(todo_id)
 
@@ -46,7 +46,7 @@ async def create_todo(todo: TodoPostSchema):
     return await db.get_todo_by_id(todo_id)
 
 
-@app.patch("/todos/{id}", response_model=TodoGetSchema)
+@app.patch("/todos/{todo_id}", response_model=TodoGetSchema)
 async def change_todo(
     todo_id: int, todo_update: TodoUpdateSchema
 ) -> dict[str, str | bool]:
@@ -65,7 +65,7 @@ async def change_todo(
     return updated_todo
 
 
-@app.delete("/todos/{id}", status_code=204)
+@app.delete("/todos/{todo_id}", status_code=204)
 async def delete_todo(todo_id: int) -> None:
     await db.delete_todo(todo_id)
 
